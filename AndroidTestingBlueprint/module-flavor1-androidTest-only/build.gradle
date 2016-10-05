@@ -12,12 +12,31 @@ android {
         testApplicationId 'com.example.android.testing.blueprint.test'
         // The Instrumentation test runner used to run tests.
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+
+        multiDexEnabled false
     }
 
     // Set the target app project. The module specified here should contain the production code
     // test should run against.
     targetProjectPath ':app'
-    targetVariant 'flavor1Debug'
+    targetVariant 'flavor1Release'
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles 'proguard_test_apk.cfg'
+        }
+    }
+
+    dexOptions {
+        preDexLibraries = true
+        dexInProcess = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
@@ -25,4 +44,47 @@ dependencies {
     compile 'com.android.support.test:runner:' + rootProject.ext.runnerVersion
     compile 'com.android.support.test:rules:' + rootProject.ext.rulesVersion
     compile 'org.hamcrest:hamcrest-core:' + rootProject.ext.hamcrestVersion
+
+    // add many dependencies to reach dex limit
+    compile 'com.jayway.android.robotium:robotium-solo:5.6.0'
+
+    compile 'org.apache.commons:commons-lang3:3.1'
+    compile 'javax.mail:mail:1.4.7'
+    compile 'commons-codec:commons-codec:1.7'
+
+    compile 'com.squareup.spoon:spoon-client:1.6.4'
+
+    compile "com.google.android.gms:play-services-ads:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-analytics:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-auth:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-base:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-basement:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-drive:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-fitness:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-games:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-gcm:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-location:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-maps:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-nearby:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-panorama:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-safetynet:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-plus:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-wallet:$rootProject.ext.gmsVersion"
+    compile "com.google.android.gms:play-services-wearable:$rootProject.ext.gmsVersion"
+
+    compile "com.android.support:support-v4:$rootProject.ext.supportLibVersion"
+    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibVersion"
+    compile "com.android.support:gridlayout-v7:$rootProject.ext.supportLibVersion"
+
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.picasso:picasso:2.3.3'
+
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.easing:library:1.0.0@aar'
+    compile 'com.daimajia.androidanimations:library:1.0.8@aar'
+
+    compile 'com.google.guava:guava:19.0'
 }
