@@ -24,7 +24,8 @@ android {
     buildTypes {
         debug {
             minifyEnabled true
-            proguardFiles 'proguard_test_apk.cfg'
+//            proguardFiles 'proguard_test_apk.cfg'
+            testProguardFiles 'proguard_test_apk.cfg'
         }
     }
 
